@@ -1,6 +1,9 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="zero-gallois"
 
+# Auto update oh-my-zsh
+DISABLE_UPDATE_PROMPT=true
+
 plugins=(
   git
   git-extras
