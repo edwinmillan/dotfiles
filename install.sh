@@ -2,12 +2,12 @@
 
 dotfiles_dir=$HOME/.dotfiles
 oh_my_zsh_dir=$dotfiles_dir/oh-my-zsh
-oh_my_zsh_theme_dir=$oh_my_zsh_dir/themes
+oh_my_zsh_theme_dir=$oh_my_zsh_dir/custom/themes
 
 files="oh-my-zsh zshrc vimrc"
-oh_my_zsh_theme=zero-gallois.zsh-theme
-zsh_syntax_highlighting=$oh_my_zsh_dir/plugins/zsh-syntax-highlighting
-zsh_autosuggestions=$oh_my_zsh_dir/plugins/zsh-autosuggestions
+oh_my_zsh_theme=gallois.zsh-theme
+zsh_syntax_highlighting=$oh_my_zsh_dir/custom/plugins/zsh-syntax-highlighting
+zsh_autosuggestions=$oh_my_zsh_dir/custom/plugins/zsh-autosuggestions
 
 
 

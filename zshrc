@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="zero-gallois"
+ZSH_THEME="gallois"
 
 # Auto update oh-my-zsh
 DISABLE_UPDATE_PROMPT=true
