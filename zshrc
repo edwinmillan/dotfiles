@@ -10,6 +10,8 @@ plugins=(
   zsh-syntax-highlighting
   django
   pyenv
+  pip
+  golang
 )
 
 
