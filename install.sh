@@ -1,10 +1,11 @@
 #!/bin/bash
 
 dotfiles_dir=$HOME/.dotfiles
+zplug_dir=$dotfiles_dir/zplug
 oh_my_zsh_dir=$dotfiles_dir/oh-my-zsh
 oh_my_zsh_theme_dir=$oh_my_zsh_dir/custom/themes
 
-files="oh-my-zsh zshrc vimrc"
+files="oh-my-zsh zplug zshrc vimrc"
 oh_my_zsh_theme=gallois.zsh-theme
 zsh_syntax_highlighting=$oh_my_zsh_dir/custom/plugins/zsh-syntax-highlighting
 zsh_autosuggestions=$oh_my_zsh_dir/custom/plugins/zsh-autosuggestions
@@ -66,20 +67,12 @@ else
     echo "$oh_my_zsh_dir exists, skipping!"
 fi
 
-# Install Zsh Syntax Highlighting
-if [ ! -d $zsh_syntax_highlighting ]; then
-    echo "$zsh_syntax_highlighting doesn't exist, cloning into $oh_my_zsh_dir/plugins"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $zsh_syntax_highlighting
+# Install zplug in dotfiles_dir
+if [ ! -d $zplug_dir ]; then
+    echo "$zplug_dir doesn't exist, installing into $dotfiles_dir"
+    git clone https://github.com/zplug/zplug $zplug_dir
 else
-    echo "$zsh_syntax_highlighting exists, skipping!"
-fi
-
-# Install Zsh Autosuggestions
-if [ ! -d $zsh_autosuggestions ]; then
-    echo "$zsh_autosuggestions doesn't exist, cloning into $oh_my_zsh_dir/plugins"
-    git clone https://github.com/zsh-users/zsh-autosuggestions $zsh_autosuggestions
-else
-    echo "$zsh_autosuggestions exists, skipping!"
+    echo "$zplug_dir exists, skipping!"
 fi
 
 # Symlink Zsh Theme
