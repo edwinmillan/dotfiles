@@ -22,6 +22,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 
 " Git
 Plug 'tpope/vim-fugitive'
