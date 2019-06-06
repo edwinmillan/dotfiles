@@ -4,7 +4,7 @@ dotfiles_dir=$HOME/.dotfiles
 oh_my_zsh_dir=$dotfiles_dir/oh-my-zsh
 oh_my_zsh_theme_dir=$oh_my_zsh_dir/themes
 
-files="zshrc vimrc"
+files="oh-my-zsh zshrc vimrc"
 oh_my_zsh_theme=zero-gallois.zsh-theme
 zsh_syntax_highlighting=$oh_my_zsh_dir/plugins/zsh-syntax-highlighting
 zsh_autosuggestions=$oh_my_zsh_dir/plugins/zsh-autosuggestions
