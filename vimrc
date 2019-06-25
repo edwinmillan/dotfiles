@@ -98,6 +98,16 @@ let g:hardtime_default_on = 1
 " Set the airline theme
 let g:airline_theme='wombat'
 
+" Clear a benign null warning
+let g:go_null_module_warning = 0
+
+" Golang Autocompletion
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+" Format with goimports instead of gofmt.
+let g:go_fmt_command = "goimports"
+
 " ##### Remapping #####
 "
 " Search mappings: These will make it so that going to the next one in a
@@ -123,6 +133,16 @@ nnoremap <leader>h <Esc>:call HardTimeToggle()<CR>
 
 " Paste Mode
 nnoremap <leader>p :set paste!<CR>
+" Golang
+" - Formatting
+nnoremap <leader>gf :GoFmt<CR>
+" - Linting
+nnoremap <leader>gl :GoLint<CR>
+" - Running Code
+nnoremap <leader>gr :GoRun<CR>
+" - Error Checking Code
+nnoremap <leader>ge :GoErrCheck<CR>
+nnoremap <leader>gv :GoVet<CR>
 
 " ##### Misc. #####
 "
