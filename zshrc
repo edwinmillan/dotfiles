@@ -28,6 +28,9 @@ zplug "plugins/pyenv", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/golang", from:oh-my-zsh
 
+# Terminal
+zplug "DarrinTisdale/zsh-aliases-exa"
+
 # Generic
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
@@ -84,3 +87,7 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
+
+# if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
+#     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+# fi
