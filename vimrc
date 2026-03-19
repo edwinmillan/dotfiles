@@ -1,6 +1,6 @@
 " ##### Plugins #####
 "
-" Download Plug and isntall it if it doesn't exist
+" Download Plug and install it if it doesn't exist
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall
@@ -73,6 +73,10 @@ set softtabstop=2
 " Set line numbers
 set number
 
+" Case-insensitive search, unless pattern has uppercase
+set ignorecase
+set smartcase
+
 " Relative Numbers
 set relativenumber
 
@@ -112,14 +116,14 @@ let g:go_fmt_command = "goimports"
 "
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
-map N Nzz
-map n nzz
+nnoremap N Nzz
+nnoremap n nzz
 
 " Insert -> Normal ft. Dr Casey
 inoremap jk <ESC>
 
 " Leader
-" let mapleader = "\<Space>"
+let mapleader = "\<Space>"
 
 " Quick editing of VimRC and Sourcing it too
 nnoremap <leader>ev :edit $MYVIMRC<CR>
@@ -137,7 +141,7 @@ nnoremap <leader>p :set paste!<CR>
 " - Formatting
 nnoremap <leader>gf :GoFmt<CR>
 " - Linting
-nnoremap <leader>gl :GoLint<CR>
+nnoremap <leader>gl :GoMetaLinter<CR>
 " - Running Code
 nnoremap <leader>gr :GoRun<CR>
 " - Error Checking Code

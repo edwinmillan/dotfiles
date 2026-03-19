@@ -1,17 +1,23 @@
 ZSH=$HOME/.oh-my-zsh
+# ZSH_THEME overridden by zplug spaceship-prompt below
 ZSH_THEME="gallois"
 ZPLUG_HOME=$HOME/.zplug
 
 # Auto update oh-my-zsh
 DISABLE_UPDATE_PROMPT=true
 
+export EDITOR=vim
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=$HOME/.zsh_history
+setopt HIST_IGNORE_DUPS
+setopt SHARE_HISTORY
 
 source $ZSH/oh-my-zsh.sh
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+# uv
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(uv generate-shell-completion zsh)"
 
 # Begin Plugins
 source $ZPLUG_HOME/init.zsh
@@ -21,11 +27,7 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
-zplug "plugins/zsh-autosuggestions", from:oh-my-zsh
-zplug "plugins/zsh-syntax-highlighting", from:oh-my-zsh
 zplug "plugins/django", from:oh-my-zsh
-zplug "plugins/pyenv", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/golang", from:oh-my-zsh
 
 # Terminal
@@ -45,7 +47,6 @@ SPACESHIP_PROMPT_ORDER=(
   package       # Package version
   golang        # Go section
   venv          # virtualenv section
-  pyenv         # Pyenv section
   line_sep      # Line break
   battery       # Battery level and status
   vi_mode       # Vi-mode indicator
@@ -73,12 +74,8 @@ SPACESHIP_DIR_TRUNC_REPO=false
 SPACESHIP_GIT_PREFIX=""
 SPACESHIP_GIT_SUFFIX=" "
 
-# Pyenv
-SPACESHIP_PYENV_SYMBOL=""
-
-
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
+if [[ $- == *i* ]] && ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
         echo; zplug install
@@ -87,7 +84,3 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
-
-# if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-#     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
-# fi

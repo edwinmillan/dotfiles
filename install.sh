@@ -1,15 +1,14 @@
 #!/bin/bash
+set -e
 
-dotfiles_dir=$HOME/.dotfiles
+dotfiles_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 zplug_dir=$dotfiles_dir/zplug
 oh_my_zsh_dir=$dotfiles_dir/oh-my-zsh
 oh_my_zsh_theme_dir=$oh_my_zsh_dir/custom/themes
 
-files="oh-my-zsh zplug zshrc vimrc"
+files="zshrc vimrc"
 oh_my_zsh_theme=gallois.zsh-theme
-zsh_syntax_highlighting=$oh_my_zsh_dir/custom/plugins/zsh-syntax-highlighting
-zsh_autosuggestions=$oh_my_zsh_dir/custom/plugins/zsh-autosuggestions
-
+vim_plug=$HOME/.vim/autoload/plug.vim
 
 
 function install_zsh () {
@@ -26,14 +25,18 @@ function install_zsh () {
     else
         # If zsh isn't installed, get the platform of the current machine
         platform=$(uname);
-        # If the platform is Linux, try an apt to install zsh and then recurse
+        # If the platform is Linux, try an apt to install zsh
         if [[ $platform == 'Linux' ]]; then
-            sudo apt install zsh
+            sudo apt install -y zsh
+            if [ ! -f /bin/zsh -a ! -f /usr/bin/zsh ]; then
+                echo "zsh installation failed, please install it manually and re-run this script!"
+                exit 1
+            fi
             install_zsh
         # If the platform is OS X, tell the user to install zsh :)
         elif [[ $platform == 'Darwin' ]]; then
             echo "Please install zsh, then re-run this script!"
-            exit
+            exit 1
         fi
     fi
 }
@@ -51,7 +54,7 @@ function symlink_file () {
         fi
     elif [ -f $HOME/.$1 ]; then
         echo "Detected regular file at $HOME/.$1, backing up to $HOME and symlinking to $dotfiles_dir/$1"
-        mv $HOME/.$1 $HOME/.$1$(date +$d-%m-%Y-%H%M)
+        mv $HOME/.$1 $HOME/.$1$(date +%d-%m-%Y-%H%M)
         ln -s $dotfiles_dir/$1 $HOME/.$1
     else
         echo "No file detected at $HOME/.$1, symlinking to $dotfiles_dir/$1"
@@ -66,6 +69,10 @@ if [ ! -d $oh_my_zsh_dir ]; then
 else
     echo "$oh_my_zsh_dir exists, skipping!"
 fi
+
+# Symlink oh-my-zsh and zplug into HOME
+symlink_file oh-my-zsh
+symlink_file zplug
 
 # Install zplug in dotfiles_dir
 if [ ! -d $zplug_dir ]; then
@@ -83,7 +90,27 @@ else
     echo "$oh_my_zsh_theme_dir/$oh_my_zsh_theme exists, skipping!"
 fi
 
-# Symlink files
+# Install uv
+if ! command -v uv &>/dev/null; then
+    echo "Installing uv..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+else
+    echo "uv exists, skipping!"
+fi
+
+# Install vim-plug
+if [ ! -f $vim_plug ]; then
+    echo "Installing vim-plug..."
+    curl -fLo $vim_plug --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+    echo "vim-plug exists, skipping!"
+fi
+
+# Symlink config files
 for file in $files; do
     symlink_file $file
 done
+
+echo ""
+echo "Done! Open Vim and run :PlugInstall to install vim plugins."
