@@ -31,7 +31,7 @@ zplug "plugins/django", from:oh-my-zsh
 zplug "plugins/golang", from:oh-my-zsh
 
 # Terminal
-zplug "DarrinTisdale/zsh-aliases-exa"
+zplug "plugins/eza", from:oh-my-zsh
 
 # Generic
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -49,8 +49,7 @@ SPACESHIP_PROMPT_ORDER=(
   venv          # virtualenv section
   line_sep      # Line break
   battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
-  jobs          # Background jobs indicator
+jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character
 )

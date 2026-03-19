@@ -98,6 +98,14 @@ else
     echo "uv exists, skipping!"
 fi
 
+# Install eza
+if ! command -v eza &>/dev/null; then
+    echo "Installing eza..."
+    sudo apt install -y eza
+else
+    echo "eza exists, skipping!"
+fi
+
 # Install vim-plug
 if [ ! -f $vim_plug ]; then
     echo "Installing vim-plug..."
