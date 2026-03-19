@@ -52,6 +52,10 @@ function symlink_file () {
             rm $HOME/.$1
             ln -s $dotfiles_dir/$1 $HOME/.$1
         fi
+    elif [ -d $HOME/.$1 ]; then
+        echo "Detected directory at $HOME/.$1, backing up and symlinking to $dotfiles_dir/$1"
+        mv $HOME/.$1 $HOME/.$1$(date +%d-%m-%Y-%H%M)
+        ln -s $dotfiles_dir/$1 $HOME/.$1
     elif [ -f $HOME/.$1 ]; then
         echo "Detected regular file at $HOME/.$1, backing up to $HOME and symlinking to $dotfiles_dir/$1"
         mv $HOME/.$1 $HOME/.$1$(date +%d-%m-%Y-%H%M)
